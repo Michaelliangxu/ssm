@@ -5,7 +5,7 @@ import com.xx.domain.Student;
 import java.util.List;
 
 public interface StuService {
-    public void saveStu(Student stu);
+     void saveStu(Student stu);
 
-    public List<Student> findAll();
+     List<Student> findAll();
 }

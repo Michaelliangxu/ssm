@@ -1,6 +1,6 @@
 package com.xx.service.serviceImpl;
 
-import com.xx.Dao.StuDao;
+import com.xx.dao.StuDao;
 import com.xx.domain.Student;
 import com.xx.service.StuService;
 import org.springframework.beans.factory.annotation.Autowired;

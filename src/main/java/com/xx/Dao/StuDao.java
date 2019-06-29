@@ -1,11 +1,13 @@
-package com.xx.Dao;
+package com.xx.dao;
 
 import com.xx.domain.Student;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
 public interface StuDao {
-    public void saveStu(Student stu);
+    void saveStu(Student stu);
 
-    public List<Student> findAll();
+    @Select("select * from stu ")
+    List<Student> findAll();
 }
