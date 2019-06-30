@@ -1,8 +1,11 @@
 package com.xx.domain;
 
+import java.util.Date;
+
 public class Student {
     private String name;
     private Integer age;
+    private Date date;
 
     public String getName() {
         return name;
@@ -20,11 +23,20 @@ public class Student {
         this.age = age;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     @Override
     public String toString() {
-        return "Stu{" +
+        return "Student{" +
                 "name='" + name + '\'' +
                 ", age=" + age +
+                ", date=" + date +
                 '}';
     }
 }

@@ -17,8 +17,8 @@ import java.util.List;
 public class T {
 
     @Test
-    public void test1(){
-        ApplicationContext ac=new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
+    public void test1() {
+        ApplicationContext ac = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
         StuServiceImpl ss = ac.getBean(StuServiceImpl.class);
         ss.findAll();
 
@@ -42,7 +42,7 @@ public class T {
         // 调用查询的方法
         List<Student> all = dao.findAll();
         // 释放资源
-        for (Student s:all){
+        for (Student s : all) {
             System.out.println(s);
         }
         session.close();
