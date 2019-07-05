@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xmlns="http://www.springframework.org/schema/beans"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd
-        http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+<beans  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns="http://www.springframework.org/schema/beans"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <!-- 配置 spring 创建容器时要扫描的包 -->
     <context:component-scan base-package="com.xx"/>
 
-    <!--开启SpringMVC注解的支持-->
-    <mvc:annotation-driven/>
+
 
     <context:property-placeholder location="classpath:mysql.properties"/>
     <!-- <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -68,10 +67,39 @@
     <!-- 配置SqlSession的工厂 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
+        <!--加载mybatis.xml-->
+        <property name="configLocation" value="classpath:mybatis.xml"></property>
+        <!-- 加载mapper.xml -->
+        <!-- <property name="mapperLocations">
+             <array>
+                 <value>classpath:com/xx/Dao/*.xml</value>
+             </array>
+         </property>-->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor"></bean>
+            </array>
+        </property>
     </bean>
+
     <!-- 配置扫描dao的包 -->
     <bean id="mapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.xx.dao"/>
     </bean>
+
+    <!-- 配置类型转换器工厂 -->
+    <bean id="converterService"
+          class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <!-- 给工厂注入一个新的类型转换器 -->
+        <property name="converters">
+            <array>
+                <!-- 配置自定义类型转换器 -->
+                <bean class="com.xx.TimeConverter.TimeConverter"></bean>
+            </array>
+        </property>
+    </bean>
+
+    <!--开启SpringMVC注解的支持-->
+    <mvc:annotation-driven conversion-service="converterService"/>
 
 </beans>
