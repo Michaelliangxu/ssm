@@ -12,7 +12,7 @@
     <name>ssm</name>
 
     <properties>
-        <spring.version>5.0.2.RELEASE</spring.version>
+        <spring.version>5.2.3.RELEASE</spring.version>
         <junit.version>4.13-beta-2</junit.version>
         <mybaitis.version>3.5.1</mybaitis.version>
         <mybatis-spring.version>2.0.1</mybatis-spring.version>
